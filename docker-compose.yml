@@ -1,0 +1,25 @@
+services:
+  llm:
+    container_name: llm
+    image: ollama/ollama:latest
+    ports:
+      - 11434:11434
+    networks:
+      - net
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+  pull-llm:
+    build:
+      dockerfile: ./docker/ollama/model.Dockerfile
+    environment:
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL-http://host.docker.internal:11434}
+      - LLM=${LLM-codellama:7b-instruct}
+    networks:
+      - net
+    depends_on:
+      - llm
+networks:
+  net:
