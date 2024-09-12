@@ -2,6 +2,8 @@ services:
   llm:
     container_name: llm
     image: ollama/ollama:latest
+    volumes:
+      - ./docker/ollama/data:/root/.ollama/
     ports:
       - 11434:11434
     networks:
