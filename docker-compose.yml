@@ -23,5 +23,33 @@ services:
       - net
     depends_on:
       - llm
+
+  database:
+    image: neo4j:5.23.0
+    ports:
+      - 7687:7687
+      - 7474:7474
+    volumes:
+      - ./docker/neo4j/data:/data
+    environment:
+      - NEO4J_AUTH=${NEO4J_USERNAME-neo4j}/${NEO4J_PASSWORD-password}
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_db_tx__log_rotation_retention__policy=false
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+    healthcheck:
+      test:
+        [
+          'CMD-SHELL',
+          'wget --no-verbose --tries=1 --spider localhost:7474 || exit 1',
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    stop_grace_period: 60s # Allow up to 60 seconds for Neo4j to shut down gracefully
+    restart: unless-stopped
+    networks:
+      - net
 networks:
   net:
