@@ -1,0 +1,9 @@
+{
+  "name": "@ai.code/pull-llm",
+  "version": "0.0.0",
+  "license": "MIT",
+  "description": "Generates an script that will pull the LLM from the provided env variable.",
+  "dependencies": {
+    "axios": "1.7.7"
+  }
+}
