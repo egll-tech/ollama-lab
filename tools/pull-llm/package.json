@@ -1,9 +1,16 @@
 {
   "name": "@ai.code/pull-llm",
-  "version": "0.0.0",
+  "type": "module",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "Generates an script that will pull the LLM from the provided env variable.",
+  "scripts": {
+    "build": "node esbuild.config.js "
+  },
   "dependencies": {
     "axios": "1.7.7"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.2"
   }
 }

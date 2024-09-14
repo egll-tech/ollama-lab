@@ -148,8 +148,12 @@ importers:
   tools/pull-llm:
     dependencies:
       axios:
-        specifier: ^1.7.7
+        specifier: 1.7.7
         version: 1.7.7
+    devDependencies:
+      esbuild:
+        specifier: ^0.19.2
+        version: 0.19.12
 
 packages:
 

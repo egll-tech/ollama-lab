@@ -6,42 +6,9 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/esbuild:esbuild",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "executor": "nx:run-commands",
       "options": {
-        "platform": "node",
-        "outputPath": "dist/tools/pull-llm",
-        "format": ["cjs"],
-        "bundle": false,
-        "main": "tools/pull-llm/src/main.ts",
-        "tsConfig": "tools/pull-llm/tsconfig.app.json",
-        "generatePackageJson": true,
-        "esbuildOptions": {
-          "sourcemap": true,
-          "outExtension": {
-            ".js": ".js"
-          }
-        }
-      },
-      "configurations": {
-        "development": {},
-        "production": {
-          "platform": "node",
-          "bundle": true,
-          "minify": true,
-          "esbuildOptions": {
-            "sourcemap": false,
-            "outfile": "docker/ollama/pull_llm.js",
-            "minify": true,
-            "banner": {
-              "js": "// IMPORTANT: DO NOT MANUALLY EDIT THIS FILE!.\n// Changes should made on \"tools/pull-llm\"."
-            },
-            "outExtension": {
-              ".js": ".js"
-            }
-          }
-        }
+        "command": "pnpm -F=pull-llm build"
       }
     }
   }
